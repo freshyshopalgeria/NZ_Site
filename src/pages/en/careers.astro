@@ -1,0 +1,91 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import jobs from "../../data/jobs.json";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Basic translation mapping for EN
+const translations: Record<string, any> = {
+    "sap-fi-co": {
+        title: "SAP FI-CO Consultant (M/F)",
+        description: "Support our French clients in their financial process transformation. S/4HANA experience preferred."
+    },
+    "abap-edi-senior": {
+        title: "Senior ABAP / EDI Developer (M/F)",
+        description: "Join our technical delivery center to drive complex developments and ensure the integration of our clients' data flows."
+    }
+};
+---
+
+<Layout title="Careers - NZ IT Services">
+  <main class="relative overflow-hidden">
+    <section class="relative px-6 py-24 sm:px-10 lg:px-14">
+      <div class="mx-auto max-w-4xl">
+        <div class="mb-20 text-center animate-fade-in-up">
+          <p class="text-sm font-bold uppercase tracking-[0.3em] text-amber-400">JOIN US</p>
+          <h1 class="mt-6 text-6xl font-black text-white sm:text-7xl">Shape the Future of SAP</h1>
+          <p class="mx-auto mt-8 max-w-2xl text-xl text-slate-400">
+            We are looking for enthusiasts, experts, and curious minds to join our delivery center in Oran.
+          </p>
+        </div>
+
+        <div class="grid gap-8 mb-24">
+          {jobs.map((job, index) => {
+            const tJob = translations[job.id] || job;
+            return (
+              <div class={`group relative rounded-[2.5rem] border border-white/5 bg-slate-900/50 p-10 hover:border-amber-500/30 transition-all animate-fade-in-up`} style={`animation-delay: ${index * 100}ms`}>
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-8">
+                  <div class="space-y-4">
+                    <div class="flex gap-4">
+                      <span class="inline-flex rounded-full bg-amber-400/10 px-4 py-1 text-xs font-bold text-amber-400">Permanent · {job.location}</span>
+                      <span class="inline-flex rounded-full bg-cyan-400/10 px-4 py-1 text-xs font-bold text-cyan-400">{job.experience}</span>
+                    </div>
+                    <h2 class="text-3xl font-bold text-white group-hover:text-amber-400 transition-colors">{tJob.title}</h2>
+                    <p class="text-slate-500 max-w-xl line-clamp-2">{tJob.description}</p>
+                  </div>
+                  <div class="flex gap-4">
+                    <a href={`/en/careers/${job.id}`} class="inline-flex items-center justify-center rounded-full border border-slate-700 bg-slate-800 px-8 py-4 font-bold text-white hover:bg-slate-700 transition-colors whitespace-nowrap">
+                      Details
+                    </a>
+                    <a href={`/en/contact?subject=Application for ${tJob.title}`} class="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 font-bold text-slate-950 hover:bg-amber-400 transition-colors whitespace-nowrap">
+                      Apply
+                    </a>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div class="rounded-[3rem] border border-white/10 bg-slate-900/80 p-12 sm:p-16 backdrop-blur-xl">
+            <h2 class="text-4xl font-bold text-white mb-12 text-center">The NZ IT Services Experience</h2>
+            <div class="grid gap-12 md:grid-cols-3">
+                <div class="space-y-6">
+                    <div class="text-amber-400">
+                        <svg viewBox="0 0 24 24" class="h-10 w-10" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/><path d="M12 7l0 5l3 3"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Balance & Flexibility</h3>
+                    <p class="text-slate-500 text-sm leading-6">A modern work environment respecting work-life balance and fostering personal growth.</p>
+                </div>
+                <div class="space-y-6">
+                    <div class="text-cyan-400">
+                        <svg viewBox="0 0 24 24" class="h-10 w-10" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Technical Challenge</h3>
+                    <p class="text-slate-500 text-sm leading-6">Work on the latest SAP versions (S/4HANA Cloud) for major international clients.</p>
+                </div>
+                <div class="space-y-6">
+                    <div class="text-amber-400">
+                        <svg viewBox="0 0 24 24" class="h-10 w-10" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.168.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Academy NZ</h3>
+                    <p class="text-slate-500 text-sm leading-6">A continuous training plan and SAP certifications supported by the company.</p>
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

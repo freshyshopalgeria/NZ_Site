@@ -1,0 +1,76 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const isEn = lang === 'en';
+---
+
+<Layout title={isEn ? "About Us - NZ IT Services" : "À propos - NZ IT Services"}>
+  <main class="relative">
+    <div class="pointer-events-none fixed inset-0 z-0">
+		<div class="absolute inset-x-0 -top-24 h-[1000px] bg-[radial-gradient(circle_at_top,_rgba(6,182,212,0.08),_transparent_45%)] animate-parallax"></div>
+	</div>
+
+    <section class="relative z-10 px-6 py-40 sm:px-10 lg:px-14">
+      <div class="mx-auto max-w-5xl">
+        <div class="mb-24 text-center animate-fade-in-up">
+          <p class="text-xs font-black uppercase tracking-[0.4em] text-cyan-400 mb-6">{isEn ? "OUR STORY" : "NOTRE HISTOIRE"}</p>
+          <h1 class="section-title leading-tight">{isEn ? "An Ambition: SAP Excellence" : "Une ambition : l'excellence SAP"}</h1>
+        </div>
+
+        <div class="grid gap-20 lg:grid-cols-2 lg:items-center mb-32">
+            <div class="animate-fade-in-left">
+                <h2 class="text-3xl font-bold text-white mb-8">{isEn ? "The Genesis of an Expertise-Driven Project" : "La genèse d'un projet d'expertise"}</h2>
+                <div class="space-y-6 text-lg text-slate-400 leading-relaxed">
+                    <p>
+                        {isEn ? "NZ IT Services is born from a deep conviction: nearshore delivery must reach the same heights of exigency as the best European IT consultancies." : "NZ IT Services est le fruit d'une conviction profonde : le delivery nearshore doit atteindre les mêmes sommets d'exigence que les meilleures ESN européennes."}
+                    </p>
+                    <p>
+                        {isEn ? "Founded by a seasoned SAP consultant (8+ years of experience on critical projects in France), NZ was built brick by brick on values of transparency, technicality, and stability." : "Fondée par un consultant SAP chevronné (8+ ans d'expérience sur des projets critiques en France), NZ s'est construite brique par brique sur des valeurs de transparence, de technicité et de stabilité."}
+                    </p>
+                    <p>
+                        {isEn ? "Our presence in Oran is no accident. It is the choice of a pool of dynamic talents, trained to international standards and sharing a rigorous work culture." : "Notre implantation à Oran n'est pas fortuite. C'est le choix d'un bassin de talents dynamiques, formés aux standards internationaux et partageant une culture de travail rigoureuse."}
+                    </p>
+                </div>
+            </div>
+            <div class="relative animate-fade-in-right">
+                <div class="absolute -inset-4 rounded-[3rem] bg-cyan-500/10 blur-3xl"></div>
+                <div class="relative glass-panel rounded-[3rem] p-12">
+                    <div class="space-y-12">
+                        {[
+                            { val: "8+", label: isEn ? "Years SAP France Exp." : "Expérience SAP France", color: "text-amber-400" },
+                            { val: "2024", label: isEn ? "Foundation Year" : "Année de création", color: "text-cyan-400" },
+                            { val: "100%", label: isEn ? "Quality Commitment" : "Engagement Qualité", color: "text-amber-400" }
+                        ].map(stat => (
+                            <div>
+                                <div class={`text-6xl font-black ${stat.color} mb-2 tracking-tighter`}>{stat.val}</div>
+                                <div class="text-slate-500 uppercase tracking-widest text-xs font-black">{stat.label}</div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-panel rounded-[4rem] p-12 sm:p-20 text-center animate-fade-in-up">
+            <h2 class="text-4xl font-black text-white mb-16">{isEn ? "Our Core Values" : "Nos Valeurs Cardinales"}</h2>
+            <div class="grid gap-12 sm:grid-cols-2 text-left">
+                {[
+                    { title: isEn ? "Excellence" : "Exigence", desc: isEn ? "We never compromise on the technical and methodological quality of our interventions." : "Nous ne transigeons jamais sur la qualité technique et méthodologique de nos interventions.", color: "text-amber-400" },
+                    { title: isEn ? "Stability" : "Stabilité", desc: isEn ? "We build long-term teams to ensure project continuity over time." : "Nous construisons des équipes pérennes pour garantir la continuité de vos projets sur le long terme.", color: "text-cyan-400" },
+                    { title: isEn ? "Transparency" : "Transparence", desc: isEn ? "Clear governance and honest reporting for a lasting relationship of trust." : "Une gouvernance claire et des reportings honnêtes pour une relation de confiance durable.", color: "text-cyan-400" },
+                    { title: isEn ? "Agility" : "Agilité", desc: isEn ? "A flexible model capable of adapting quickly to your changing business priorities." : "Un modèle flexible capable de s'adapter rapidement à vos changements de priorités business.", color: "text-amber-400" }
+                ].map(v => (
+                    <div class="space-y-4 group">
+                        <div class={`${v.color} font-black text-2xl uppercase tracking-wider group-hover:scale-105 transition-transform origin-left`}>{v.title}</div>
+                        <p class="text-slate-400 text-lg leading-relaxed">{v.desc}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

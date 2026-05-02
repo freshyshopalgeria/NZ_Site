@@ -1,0 +1,96 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const navLinks = [
+  { name: t('nav.home'), href: lang === 'fr' ? '/' : '/en/' },
+  { name: t('nav.about'), href: lang === 'fr' ? '/about' : '/en/about' },
+  { name: t('nav.services'), href: lang === 'fr' ? '/services' : '/en/services' },
+  { name: t('nav.careers'), href: lang === 'fr' ? '/careers' : '/en/careers' },
+  { name: t('nav.contact'), href: lang === 'fr' ? '/contact' : '/en/contact' },
+];
+
+const currentPath = Astro.url.pathname;
+const getSwitchLanguageLink = (targetLang: string) => {
+  if (targetLang === 'fr') {
+    return currentPath.replace('/en', '') || '/';
+  } else {
+    return '/en' + (currentPath === '/' ? '' : currentPath);
+  }
+};
+---
+
+<nav class="fixed top-0 z-50 w-full border-b border-white/10 bg-slate-950/80 backdrop-blur-md">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-20 items-center justify-between">
+      <div class="flex items-center">
+        <a href={lang === 'fr' ? '/' : '/en/'} class="flex items-center gap-3 group">
+          <img src="/nz-logo-blanc.png" alt="NZ IT Services Logo" class="h-10 w-auto transition-transform duration-300 group-hover:scale-110">
+          <span class="text-lg font-bold tracking-widest text-white">NZ IT SERVICES</span>
+        </a>
+      </div>
+      <div class="hidden md:flex items-center gap-8">
+        <div class="flex items-baseline space-x-8">
+          {navLinks.map((link) => (
+            <a
+              href={link.href}
+              class="text-sm font-medium text-slate-300 transition-colors duration-300 hover:text-amber-400"
+            >
+              {link.name}
+            </a>
+          ))}
+        </div>
+        
+        <div class="flex items-center gap-2 border-l border-white/10 pl-8">
+          <a href={getSwitchLanguageLink('fr')} class={`text-xs font-bold transition-colors ${lang === 'fr' ? 'text-amber-400' : 'text-slate-500 hover:text-slate-300'}`}>FR</a>
+          <span class="text-slate-600">|</span>
+          <a href={getSwitchLanguageLink('en')} class={`text-xs font-bold transition-colors ${lang === 'en' ? 'text-amber-400' : 'text-slate-500 hover:text-slate-300'}`}>EN</a>
+        </div>
+      </div>
+      <div class="md:hidden">
+        <button
+          type="button"
+          id="mobile-menu-button"
+          class="inline-flex items-center justify-center rounded-md p-2 text-slate-400 hover:bg-slate-900 hover:text-white focus:outline-none"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+        >
+          <span class="sr-only">Ouvrir le menu</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hidden md:hidden" id="mobile-menu">
+    <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3 bg-slate-950 border-b border-white/10">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="block rounded-md px-3 py-2 text-base font-medium text-slate-300 hover:bg-slate-900 hover:text-amber-400"
+        >
+          {link.name}
+        </a>
+      ))}
+      <div class="flex items-center gap-4 px-3 py-4 border-t border-white/5 mt-2">
+        <a href={getSwitchLanguageLink('fr')} class={`text-xs font-bold ${lang === 'fr' ? 'text-amber-400' : 'text-slate-500'}`}>FRANÇAIS</a>
+        <a href={getSwitchLanguageLink('en')} class={`text-xs font-bold ${lang === 'en' ? 'text-amber-400' : 'text-slate-500'}`}>ENGLISH</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const button = document.getElementById('mobile-menu-button');
+  const menu = document.getElementById('mobile-menu');
+
+  button?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+    const expanded = button.getAttribute('aria-expanded') === 'true' || false;
+    button.setAttribute('aria-expanded', (!expanded).toString());
+  });
+</script>

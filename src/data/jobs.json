@@ -1,0 +1,46 @@
+[
+  {
+    "id": "sap-fi-co",
+    "title": "Consultant SAP FI-CO (H/F)",
+    "location": "Oran, Algérie",
+    "type": "CDI",
+    "experience": "Confirmé (3-5 ans)",
+    "description": "Nous recherchons un consultant SAP FI-CO passionné pour accompagner nos clients français dans la transformation de leurs processus financiers.",
+    "missions": [
+      "Analyse des besoins métiers et rédaction des spécifications fonctionnelles",
+      "Paramétrage des modules FI (GL, AP, AR, AA) et CO (OM, PC, PA)",
+      "Accompagnement des utilisateurs lors des phases de tests et de recette",
+      "Animation d'ateliers de conception et formation des utilisateurs clés",
+      "Support post-production et maintenance évolutive"
+    ],
+    "profile": [
+      "Diplôme d'ingénieur ou master en finance/informatique",
+      "Expérience significative sur SAP FI et/ou CO",
+      "Connaissance de S/4HANA est un plus",
+      "Excellente maîtrise du français (oral et écrit)",
+      "Sens du service client et esprit d'équipe"
+    ]
+  },
+  {
+    "id": "abap-edi-senior",
+    "title": "Développeur ABAP / EDI Senior (H/F)",
+    "location": "Oran, Algérie",
+    "type": "CDI",
+    "experience": "Senior (5+ ans)",
+    "description": "Rejoignez notre centre de delivery technique pour piloter des développements complexes et assurer l'intégration des flux de nos clients.",
+    "missions": [
+      "Conception technique et développement ABAP Objects",
+      "Mise en œuvre d'interfaces EDI (IDOC, ALE, PI/PO)",
+      "Développement de formulaires (Smartforms, Adobe Forms)",
+      "Optimisation de la performance des programmes",
+      "Veille technologique sur Fiori, UI5 et BTP"
+    ],
+    "profile": [
+      "Solide bagage technique SAP ABAP",
+      "Expérience confirmée sur les flux d'intégration EDI",
+      "Capacité à encadrer des profils juniors",
+      "Rigueur, autonomie et curiosité technique",
+      "Maîtrise du français indispensable"
+    ]
+  }
+]

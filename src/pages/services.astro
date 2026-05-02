@@ -1,0 +1,108 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const isEn = lang === 'en';
+---
+
+<Layout title={isEn ? "Our SAP Solutions - NZ IT Services" : "Nos Solutions SAP - NZ IT Services"}>
+  <main class="relative">
+    <div class="pointer-events-none fixed inset-0 z-0">
+		<div class="absolute inset-x-0 -top-24 h-[1000px] bg-[radial-gradient(circle_at_top,_rgba(245,158,11,0.08),_transparent_45%)] animate-parallax"></div>
+	</div>
+
+    <section class="relative z-10 px-6 py-40 sm:px-10 lg:px-14">
+      <div class="mx-auto max-w-6xl">
+        <div class="mb-24 text-center animate-fade-in-up">
+          <p class="text-xs font-black uppercase tracking-[0.4em] text-amber-400 mb-6">{isEn ? "OUR EXPERTISE" : "NOTRE EXPERTISE"}</p>
+          <h1 class="section-title leading-tight">{isEn ? "End-to-End SAP Solutions" : "Solutions SAP de bout en bout"}</h1>
+          <p class="mx-auto mt-8 max-w-3xl text-xl text-slate-400 leading-relaxed">
+            {isEn ? "Bridging the gap between business needs and technical excellence to drive your enterprise performance." : "L'alliance de la vision métier et de l'excellence technique pour propulser la performance de votre entreprise."}
+          </p>
+        </div>
+
+        <div class="grid gap-20 lg:grid-cols-2 mb-40">
+          <div class="space-y-16">
+            <div class="animate-fade-in-left">
+                <h2 class="text-4xl font-black text-white mb-10 tracking-tight">{isEn ? "Functional Core" : "Expertise Fonctionnelle"}</h2>
+                <div class="grid gap-8 sm:grid-cols-2">
+                    {[
+                        { id: "FI-CO", title: isEn ? "Finance & Control" : "Finance & Contrôle", desc: isEn ? "Optimizing financial flows and strategic steering." : "Optimisation des flux financiers et pilotage stratégique.", color: "text-amber-400", border: "hover:border-amber-500/40" },
+                        { id: "SD-MM", title: isEn ? "Sales & Logistics" : "Vente & Logistique", desc: isEn ? "Full supply chain and procurement lifecycle management." : "Maîtrise complète de la supply chain et des achats.", color: "text-cyan-400", border: "hover:border-cyan-500/40" }
+                    ].map(mod => (
+                        <div class={`glass-card group ${mod.border}`}>
+                            <div class={`text-4xl font-black ${mod.color} mb-4 tracking-tighter`}>{mod.id}</div>
+                            <h3 class="text-white text-xl font-bold mb-3">{mod.title}</h3>
+                            <p class="text-slate-500 text-sm leading-6">{mod.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <div class="animate-fade-in-left delay-200">
+                <h2 class="text-4xl font-black text-white mb-10 tracking-tight">{isEn ? "Technical Engine" : "Expertise Technique"}</h2>
+                <div class="grid gap-8 sm:grid-cols-2">
+                    {[
+                        { id: "ABAP", title: isEn ? "Advanced Dev" : "Développement", desc: isEn ? "Custom objects, Fiori/UI5 and performance tuning." : "Développements spécifiques, Fiori/UI5 et optimisation.", color: "text-amber-400", border: "hover:border-amber-500/40" },
+                        { id: "EDI", title: isEn ? "Integration" : "Intégration", desc: isEn ? "Complex inter-system flows and data exchanges." : "Flux inter-systèmes complexes et échanges de données.", color: "text-cyan-400", border: "hover:border-cyan-500/40" }
+                    ].map(mod => (
+                        <div class={`glass-card group ${mod.border}`}>
+                            <div class={`text-4xl font-black ${mod.color} mb-4 tracking-tighter`}>{mod.id}</div>
+                            <h3 class="text-white text-xl font-bold mb-3">{mod.title}</h3>
+                            <p class="text-slate-500 text-sm leading-6">{mod.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+          </div>
+
+          <div class="relative animate-fade-in-right">
+             <div class="sticky top-40">
+                <div class="absolute -inset-4 rounded-[3.5rem] bg-amber-500/5 blur-3xl"></div>
+                <div class="relative glass-panel rounded-[3.5rem] p-12 shadow-2xl">
+                    <h3 class="text-3xl font-black text-white mb-10 tracking-tight">{isEn ? "Delivery Excellence" : "Modèle de Delivery"}</h3>
+                    
+                    <div class="space-y-12">
+                        {[
+                            { num: "1", title: isEn ? "Strategic Scoping" : "Cadrage Stratégique", desc: isEn ? "Roadmap definition and legacy audit (S/4HANA target)." : "Définition de trajectoire et audit (cible S/4HANA)." },
+                            { num: "2", title: isEn ? "Nearshore Execution" : "Exécution Nearshore", desc: isEn ? "Build phase from Oran under senior FR management." : "Réalisation depuis Oran sous pilotage senior FR." },
+                            { num: "3", title: isEn ? "Hypercare & Run" : "Déploiement & Run", desc: isEn ? "User adoption focus and 24/7 reactive support." : "Focus adoption utilisateurs et support réactif." }
+                        ].map(step => (
+                            <div class="flex gap-8 group">
+                                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-amber-400 text-slate-950 font-black text-xl shadow-lg group-hover:scale-110 transition-transform">{step.num}</div>
+                                <div>
+                                    <h4 class="text-xl font-bold text-white mb-3 tracking-wide">{step.title}</h4>
+                                    <p class="text-slate-500 text-sm leading-relaxed">{step.desc}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+             </div>
+          </div>
+        </div>
+
+        <div class="glass-panel rounded-[4rem] p-16 sm:p-24 text-center animate-fade-in-up">
+            <h2 class="text-5xl font-black text-white mb-20 tracking-tight">{isEn ? "Why Partner with NZ IT Services?" : "Pourquoi choisir NZ IT Services ?"}</h2>
+            <div class="grid gap-20 md:grid-cols-3">
+                {[
+                    { val: "100%", title: "Focus SAP", desc: isEn ? "Exclusive expertise, zero dilution." : "Expertise exclusive, aucune dilution.", color: "text-amber-400" },
+                    { val: "Local", title: isEn ? "Proximity" : "Proximité", desc: isEn ? "One team, one language, one timezone." : "Une équipe, une langue, un fuseau.", color: "text-cyan-400" },
+                    { val: "ROI", title: "Optimized", desc: isEn ? "Premium standards at nearshore efficiency." : "Standards premium au coût nearshore.", color: "text-amber-400" }
+                ].map(item => (
+                    <div class="space-y-6">
+                        <div class={`${item.color} text-7xl font-black tracking-tighter`}>{item.val}</div>
+                        <div class="space-y-3">
+                            <p class="text-2xl font-bold text-white tracking-wide">{item.title}</p>
+                            <p class="text-slate-500 leading-relaxed text-sm">{item.desc}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

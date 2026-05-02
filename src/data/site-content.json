@@ -1,0 +1,44 @@
+{
+  "fr": {
+    "sectors": [
+      { "name": "Énergie & Utilities", "icon": "⚡" },
+      { "name": "Industrie & Auto", "icon": "🏭" },
+      { "name": "Retail & Consumer", "icon": "🛒" },
+      { "name": "Banque & Assurance", "icon": "🏦" },
+      { "name": "Secteur Public", "icon": "🏛️" }
+    ],
+    "testimonials": [
+      {
+        "quote": "NZ IT Services a transformé notre maintenance SAP. Leur modèle nearshore offre des experts avec une synchronisation parfaite sur nos horaires.",
+        "author": "Directeur IT, Secteur Énergie",
+        "rating": 5
+      },
+      {
+        "quote": "Haute qualité technique sur les développements ABAP et grande réactivité. Un partenaire de confiance pour nos projets long terme.",
+        "author": "Responsable SAP, Industrie Automobile",
+        "rating": 5
+      }
+    ]
+  },
+  "en": {
+    "sectors": [
+      { "name": "Energy & Utilities", "icon": "⚡" },
+      { "name": "Industry & Auto", "icon": "🏭" },
+      { "name": "Retail & Consumer", "icon": "🛒" },
+      { "name": "Banking & Insurance", "icon": "🏦" },
+      { "name": "Public Sector", "icon": "🏛️" }
+    ],
+    "testimonials": [
+      {
+        "quote": "NZ IT Services has been a game-changer for our SAP maintenance. Their nearshore model provides expert consultants with perfect FR synchronization.",
+        "author": "IT Director, Energy Sector",
+        "rating": 5
+      },
+      {
+        "quote": "High technical quality on ABAP developments and very reactive support. A trusted partner for our long-term projects.",
+        "author": "SAP Manager, Automotive Industry",
+        "rating": 5
+      }
+    ]
+  }
+}

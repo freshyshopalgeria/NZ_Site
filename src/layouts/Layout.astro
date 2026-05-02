@@ -1,26 +1,63 @@
 ---
 import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import { getLangFromUrl } from "../i18n/utils";
+
+interface Props {
+	title?: string;
+}
+
+const { title = "NZ IT Services - Votre Partenaire IT SAP" } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
 ---
 <!doctype html>
-<html lang="fr">
+<html lang={lang} class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/png" href="/nz-logo-blanc.png" />
 		<meta name="generator" content={Astro.generator} />
-		<title>NZ IT Services</title>
+		<title>{title}</title>
 	</head>
-	<body>
-		<slot />
+	<body class="bg-slate-950 text-slate-100 selection:bg-amber-500/30">
+		<Navbar />
+		<div class="pt-20">
+			<slot />
+		</div>
+		<Footer />
+...
+
+		<script>
+			// Animation au scroll (global)
+			document.addEventListener('DOMContentLoaded', function() {
+				const observerOptions = {
+					threshold: 0.1,
+					rootMargin: '0px 0px -50px 0px'
+				};
+
+				const observer = new IntersectionObserver(function(entries) {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							(entry.target as HTMLElement).style.opacity = '1';
+							(entry.target as HTMLElement).style.transform = 'translateY(0) scale(1)';
+						}
+					});
+				}, observerOptions);
+
+				document.querySelectorAll('.animate-fade-in-up, .animate-fade-in-left, .animate-fade-in-right, .animate-slide-in-up, .animate-bounce-in, .animate-rotate-in, .animate-flip-in').forEach(el => {
+					observer.observe(el);
+				});
+			});
+		</script>
 	</body>
 </html>
 
-<style>
+<style is:global>
 	html,
 	body {
 		margin: 0;	
 		width: 100%;
-		height: 100%;
+		min-height: 100%;
 	}
 </style>

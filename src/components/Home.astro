@@ -1,0 +1,201 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import content from "../data/site-content.json";
+
+const { url } = Astro;
+const lang = getLangFromUrl(url);
+const t = useTranslations(lang);
+const isEn = lang === 'en';
+
+const { sectors, testimonials } = (content as any)[lang];
+const marqueeSectors = [...sectors, ...sectors];
+
+const trustItems = [
+	{ 
+		icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z", 
+		title: isEn ? "IT Consultancy Quality" : "Qualité ESN", 
+		desc: isEn ? "French delivery excellence" : "Standards de delivery français" 
+	},
+	{ 
+		icon: "M12 6v6l4 2", 
+		title: isEn ? "FR Timezone" : "Timezone FR", 
+		desc: isEn ? "Perfect synchronization" : "Synchronisation parfaite",
+		hasCircle: true
+	},
+	{ 
+		icon: "M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2", 
+		title: isEn ? "Dedicated Experts" : "Experts Dédiés", 
+		desc: isEn ? "Tailored SAP sourcing" : "Sourcing SAP sur-mesure",
+		extraPath: "M23 21v-2a4 4 0 0 0-3-3.87 M16 3.13a4 4 0 0 1 0 7.75"
+	}
+];
+---
+
+<main class="relative overflow-x-hidden">
+    <!-- Background Layers -->
+    <div class="pointer-events-none fixed inset-0 z-0">
+        <div class="absolute inset-x-0 -top-24 h-[1000px] bg-[radial-gradient(circle_at_top,_rgba(245,158,11,0.15),_transparent_45%),radial-gradient(circle_at_20%_top,_rgba(125,211,252,0.1),_transparent_35%)] animate-parallax"></div>
+    </div>
+    
+    <div class="relative z-10">
+        <!-- Hero Section -->
+        <section class="px-6 pt-32 pb-16 sm:px-10 lg:px-14">
+            <div class="mx-auto max-w-7xl">
+                <div class="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+                    <div class="space-y-8">
+                        <div class="inline-flex items-center gap-2.5 rounded-full border border-amber-400/20 bg-amber-400/5 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-amber-300 animate-fade-in-left">
+                            <span class="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+                            {isEn ? "Elite SAP Consultancy" : "L'excellence SAP au service de votre SI"}
+                        </div>
+                        <h1 class="hero-title animate-fade-in-up delay-200">
+                            {isEn ? "Your Trusted " : "Votre partenaire "}<span class="text-amber-400">SAP</span> {isEn ? "Partner." : "de confiance."}
+                        </h1>
+                        <p class="max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg animate-fade-in-up delay-300">
+                            {isEn ? "We help companies optimize their SAP ecosystem with a robust nearshore model built on French standards." : "Nous accompagnons les entreprises dans l'optimisation de leur écosystème SAP avec un modèle nearshore agile et performant."}
+                        </p>
+                        <div class="flex flex-wrap gap-4 pt-4 animate-fade-in-up delay-500">
+                            <a href={isEn ? "/en/contact" : "/contact"} class="btn-primary">
+                                {isEn ? "Start a project" : "Démarrer un projet"}
+                            </a>
+                            <a href={isEn ? "/en/services" : "/services"} class="btn-secondary">
+                                {isEn ? "Our services" : "Nos services"}
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="relative hidden lg:block animate-fade-in-right delay-500">
+                        <div class="absolute -inset-4 rounded-[3rem] bg-amber-500/10 blur-3xl"></div>
+                        <div class="relative rounded-[2.5rem] border border-slate-800 bg-slate-900/90 p-8 backdrop-blur-xl">
+                            <div class="space-y-6">
+                                {trustItems.map((item) => (
+                                    <div class="flex items-center gap-5 group">
+                                        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-amber-400/10 text-amber-400 group-hover:bg-amber-400 group-hover:text-slate-950 transition-all duration-300">
+                                            <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d={item.icon}/>
+                                                {item.hasCircle && <circle cx="12" cy="12" r="10"/>}
+                                                {item.extraPath && <path d={item.extraPath}/>}
+                                                {item.title.includes("Experts") && <circle cx="9" cy="7" r="4"/>}
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <div class="text-lg font-bold text-white leading-tight">{item.title}</div>
+                                            <div class="text-slate-400 text-xs mt-0.5">{item.desc}</div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sectors Marquee -->
+        <section class="bg-slate-900/50 border-y border-white/5 py-8 overflow-hidden">
+            <p class="text-center text-slate-500 font-bold uppercase tracking-widest text-[9px] mb-6">{isEn ? "Sectors we serve" : "Nos secteurs d'intervention"}</p>
+            <div class="relative flex overflow-x-hidden">
+                <div class="animate-marquee whitespace-nowrap flex items-center">
+                    {marqueeSectors.map((sector) => (
+                        <div class="flex items-center gap-4 px-12">
+                            <span class="text-2xl grayscale opacity-50">{sector.icon}</span>
+                            <span class="text-xl font-black text-slate-400 uppercase tracking-tighter">{sector.name}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Figures -->
+        <section class="px-6 py-20 sm:px-10">
+            <div class="mx-auto max-w-7xl">
+                <div class="mb-12 text-center animate-fade-in-up">
+                    <span class="section-tag">{isEn ? "AUTHORITY" : "AUTORITÉ"}</span>
+                    <h2 class="section-title">{isEn ? "NZ IT Services in Numbers" : "NZ IT Services en Chiffres"}</h2>
+                </div>
+                <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+                    {[
+                        { val: "8+", label: isEn ? "Years Expertise" : "Ans d'Expertise" },
+                        { val: "2", label: isEn ? "Hubs" : "Bureaux" },
+                        { val: "100%", label: isEn ? "French Nearshore" : "Nearshore FR" },
+                        { val: "S/4", label: isEn ? "HANA Focus" : "Focus HANA" }
+                    ].map(stat => (
+                        <div class="text-center space-y-1 animate-fade-in-up">
+                            <div class="text-6xl font-black text-white tracking-tighter">{stat.val}</div>
+                            <div class="text-[10px] uppercase tracking-[0.3em] text-amber-400 font-black">{stat.label}</div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Summary -->
+        <section class="px-6 py-20 sm:px-10 bg-slate-900/20">
+            <div class="mx-auto max-w-6xl">
+                <div class="mb-12 text-center animate-fade-in-up">
+                    <span class="section-tag">{isEn ? "EXPERTISE" : "EXPERTISE"}</span>
+                    <h2 class="section-title">{isEn ? "Our Core Service Offer" : "Notre Offre de Services"}</h2>
+                </div>
+                <div class="grid gap-8 md:grid-cols-3">
+                    {[
+                        { title: isEn ? "Consulting" : "Conseil & Audit", desc: isEn ? "Strategy and SAP roadmap definition." : "Définition de stratégie et trajectoire SAP.", icon: "M12 20V10M18 20V4M6 20v-4" },
+                        { title: isEn ? "Implementation" : "Implémentation", desc: isEn ? "Core module deployment and migration." : "Déploiement de modules et migration.", icon: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" },
+                        { title: isEn ? "Support" : "Support & TMA", desc: isEn ? "Reactive maintenance from our delivery center." : "Maintenance réactive depuis notre centre.", icon: "M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" }
+                    ].map((item, idx) => (
+                        <div class="glass-card animate-fade-in-up" style={`animation-delay: ${idx * 100}ms`}>
+                            <div class="mb-5 flex h-10 w-10 items-center justify-center rounded-xl bg-amber-400/10 text-amber-400">
+                                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path d={item.icon}/></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">{item.title}</h3>
+                            <p class="text-slate-400 leading-relaxed text-xs">{item.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="px-6 py-20 sm:px-10">
+            <div class="mx-auto max-w-7xl">
+                <div class="mb-12 text-center animate-fade-in-up">
+                    <span class="section-tag" style="color: #22d3ee">{isEn ? "TESTIMONIALS" : "TÉMOIGNAGES"}</span>
+                    <h2 class="section-title">{isEn ? "What Our Clients Say" : "Ils Parlent de Nous"}</h2>
+                </div>
+                <div class="grid gap-8 lg:grid-cols-2">
+                    {testimonials.map((t: any, idx: number) => (
+                        <div class="glass-card relative animate-fade-in-up" style={`animation-delay: ${idx * 200}ms`}>
+                            <div class="flex gap-1 mb-5">
+                                {[...Array(t.rating)].map(() => (
+                                    <svg class="h-4 w-4 text-amber-400 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                ))}
+                            </div>
+                            <p class="text-lg text-slate-300 italic leading-relaxed mb-8">"{t.quote}"</p>
+                            <div class="flex items-center gap-4">
+                                <div class="h-9 w-9 rounded-full bg-slate-800 flex items-center justify-center font-bold text-amber-400 text-xs">
+                                    {t.author.charAt(0)}
+                                </div>
+                                <div>
+                                    <div class="text-white font-bold text-xs">{t.author}</div>
+                                    <div class="text-slate-500 text-[10px]">Corporate Client</div>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="px-6 py-24 sm:px-10 text-center">
+            <div class="mx-auto max-w-4xl rounded-[2.5rem] border border-amber-500/20 bg-slate-900/50 p-12 sm:p-16 shadow-2xl">
+                <h2 class="section-title mb-6 leading-tight">{isEn ? "Secure Your SAP Performance" : "Sécurisez votre performance SAP"}</h2>
+                <p class="text-base text-slate-300 mb-10 max-w-xl mx-auto leading-relaxed">
+                    {isEn ? "Contact us to define the best nearshore setup for your specific ecosystem." : "Contactez-nous pour définir le meilleur setup nearshore pour votre écosystème."}
+                </p>
+                <a href={isEn ? "/en/contact" : "/contact"} class="btn-primary px-10 py-5">
+                    {isEn ? "Book a Meeting" : "Prendre rendez-vous"}
+                    <svg viewBox="0 0 24 24" class="ml-2 h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+        </section>
+    </div>
+</main>
